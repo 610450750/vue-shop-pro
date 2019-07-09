@@ -1,0 +1,22 @@
+vscode三方插件
+0、字体：Comic Sans MS
+1、Atom One Dark Theme  设置主题
+    On Dark Pro 设置主题
+2、Chinest  设置语言
+3、Beautify 自动填充格式
+4、Live Server 实时编译预览
+5、open in browser 本地访问ctrl+f1
+6、Vetur 支持vue 语言 可以在.vue 单组件文件中提供代码提示
+7、Prettier - Code formatter 代码格式化
+创建：.prettierrc配置文件
+{
+  "trailingComma": "es5",
+  "tabWidth": 2,          //tab 默认有2个空格
+  "semi": false,            //去除;号结尾
+  "singleQuote": true   //单引号渲染字符串
+}
+8、Vue 2 Snippets 插件 给.vue单组件文件 设置代码片段
+设置》代码片段》vue.json 中配置
+9、给html设置vue 自定义代码片段
+设置》代码片段》html.json 中配置
+10、Auto Rename Tag 实时同步元素前后标签 插件 

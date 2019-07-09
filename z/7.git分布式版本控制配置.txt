@@ -1,0 +1,37 @@
+1、安装git  Git-2.22.0-64-bit.exe
+2、使用 Git Bash 工具 打开命令行窗口
+3、配置用户名和密码
+git config --global user.name   duqiubo
+git config --global user.email  610450750@qq.com
+4、在命令行窗口中切换到项目根目录
+
+本地仓库
+git init  (初始化本地仓库)  --执行完后会在项目中生成一个 .git仓库区（该文件是隐藏的）
+git status  (文件状态)
+git add index.html (提交到暂存区)   --批量提交 git add .
+ps：提交到暂存区的文件为绿色,
+       未提交的文件为红色
+git checkout index.html                           --从缓存区中恢复文件
+git commit -m '存入仓库 正式版本 V1.0'   --从缓存去存入本地仓库
+git log      --查看之前版和之后版本
+git reflog --查看仓库中所有版本记录
+
+服务端远程 分享仓库
+git init --bare --初始化远程仓库
+git clone 远程仓库地址 [项目名称]   --克隆远程仓库
+git pull 远程仓库地址 master          --拉取远程仓库
+git push  远程仓库地址 master        --提交远程仓库
+
+git ssh 协议（可以与 github 码云等平台关联）
+1.  生成公钥 私钥
+    git命令行中：ssh-keygen -t rsa
+2. 复制你的公钥
+    公钥地址：C盘->当前用户->.ssh文件夹
+    ->id_rsa        私钥
+    ->id_rsa.pub  公钥  双击打开 复制内容
+3. 登录github 
+    610450750@qq.com
+    ZXC8106107s
+    点开头像-->选择Settings-->SSH and GPG keys-->New SSH key
+    -->把复制的公钥 拷贝到 key 中
+    

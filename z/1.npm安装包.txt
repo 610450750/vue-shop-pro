@@ -1,0 +1,14 @@
+npm指令用法
+cls：清空
+npm cache clear --force 清理缓存
+nodemon app.js  代码修改后会重启web服务
+npm un -g  vue-cli  //un 卸载安装 -g 全局
+
+1、创建package.json文件：npm init -y                版本配置文件
+2、下载nodemon工具: npm install -g  nodemon   代码修改后会重启web服务
+3、下载express工具：npm install express         接收请求 发送响应体
+4、下载body-parser工具：npm install body-parser 解析 urlencoded 和  json 格式    中间键(解析请求体)
+5、下载express-art-template工具:npm install express-art-template 模板引擎
+6、下载moment工具：npm install moment          控制日期
+7、下载webpack工具：npm install webpack webpack-cli --save-dev  安装webpack工具,并且设置为开发依赖
+8、下载jquery：npm install jquery

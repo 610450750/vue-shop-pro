@@ -1,0 +1,108 @@
+准备工作
+1、创建package.json文件：npm init -y                版本配置文件
+2、下载jquery：npm install jquery
+3、创建一个src 文件夹 webpack 默认会在src下寻找 资源
+4、在src文件夹中创建入口文件 index.js 默认名称
+5、在src文件夹中 在index.html中 导入 index.js文件
+
+使用webpack
+1、安装webpack
+webpack-cli 是webpack的内部依赖 开发依赖
+npm install webpack  webpack-cli --save-dev别名（-D）
+2、在package.json中 配置使用webpack的指令
+在scripts标签中增加 ,"pack":"webpack" 使用pack 转接
+3、启动webpack 打包指令
+语法：npm run pack
+4、打包后会在src同级生成一个dist文件夹，同时生成一个main.js文件,
+main.js 文件会将所有的js,css,jquery等内容 压缩到一个js中,可以实现,降解,转换,兼容
+5、配置webpack的 模式 入口 出口 创建webpack.config.js配置文件
+详细见 webpack.config.js 配置
+
+---------------------------------------------------------------------------------
+//webpack 模板页面构建 （HtmlWebpackPlugin插件）
+1、webpack工具 可以对html进行打包 并且直接引入打包好的js文件
+在中文官网中找到 plugins,下载HtmlWebpackPlugin插件
+安装：npm install --save-dev html-webpack-plugin
+// 配置webpack 打包html插件 （生成后会自动引入出口js文件）
+详细见 webpack.config.js 配置
+---------------------------------------------------------------------------------
+//weback 实时打包构建 （devserver插件）
+1、webpack工具 这个工具可以实时处理js、html模板、实时查看效果
+在中文官网中找到->指南 ->开发中->webpack-dev-server
+安装：npm install --save-dev webpack-dev-server
+在中文官网中找到->文档->配置->开发中devserver 查看参数
+详细见 webpack.config.js 配置
+2、在package.json中 配置使用webpack的指令
+在scripts标签中增加 ,"line":"webpack-dev-server" 使用pack 转接
+3、启动webpack 实时打包指令
+语法：npm run line
+内存级打包不会在项目中生成文件。
+访问地址：http://127.0.0.1:1024/app.html
+---------------------------------------------------------------------------------
+weback 解析器loader 的使用
+一、webpack打包css文件需要两个loader配合使用
+1、css-loader：该loader可以实现在js中以import/require的方式引入css
+安装：npm install --save-dev css-loader
+2、style-loader：该loader可以实现在html中以style的形式嵌入css
+安装：npm install style-loader --save-dev
+详细见webpack.config.js配置
+
+二、webpack打包less需要loader配合
+1、less-loader：该loader可以实现在js中以import/require的方式引入css
+安装：npm install --save-dev less-loader less
+详细见webpack.config.js配置
+
+三、webpack打包img图片
+1、url-loader：该loader可以实现把图片变为字符串形式提供
+好处是节省了一个http请求资源的消耗
+url-loader 功能类似于 file-loader，但是在文件大小（单位 byte）低于指定的限制时，可以返回一个 DataURL
+安装：npm install --save-dev url-loader
+详细见webpack.config.js配置
+
+2、file-loader：该loader默认情况下，生成的文件的文件名就是文件内容的 MD5 哈希值并会保留所引用资源的原始扩展名。
+安装：npm install --save-dev file-loader
+file-loader 是url-loader 的依赖不需要在webpack.config.js中配置
+
+四、webpack 将高级代码转换为低级代码运行
+1、babel-loader：该loader可以对ES6 ES7 代码做降级处理
+babel-loader 中 每个需要降级的语法 都需要对应一个plugin 由多个plugin组成的集合叫preset
+例如：babel-loader：preset[plugin,plugin,plugin]
+2、@babel/core 和 @babel/preset-env 是babel-loader生产依赖包
+安装：npm install --save-dev babel-loader @babel/core @babel/preset-env
+3、需要在.babelrc文件中配置preset
+
+五、webpack声明class类static 静态成员
+在webpack环境中缺少classProperties插件支持
+1、class-Properties插件：class的static静态属性降级处理缺少此plugin插件
+安装:npm install --save-dev @babel/plugin-proposal-class-properties
+2、需要在.babelrc文件中配置plugin
+---------------------------------------------------------------------------------
+Vue插件
+安装：npm i vue
+webpack中使用vue loader
+安装：npm install --save-dev vue-loader
+安装依赖：npm install vue-template-compiler --save-dev
+使用vue loader 编辑单组件文件.vue结尾时 需要vscode 安装一个插件vetuer,
+该插件可以让vscode识别 vue 语法,如果不安装 .Vue文件中会失去代码提示
+---------------------------------------------------------------------------------
+Vue-Router 路由
+安装：npm install vue-router
+---------------------------------------------------------------------------------
+Vue 的Element-Ui 组件库
+1、安装：npm i element-ui
+2、给element-ui的字体库文件配置loadery
+在package.config.js中配置{test:/\.(eot|svg|ttf|woff|woff2)$/,use:'url-loader'}
+如果不配置默认安装后会报错
+
+3、element-ui 按需引入模块
+借助 babel-plugin-component，我们可以只引入需要的组件，以达到减小项目体积的目的。
+安装：npm install babel-plugin-component -D
+需要在.babelrc 文件中配置plugin
+ [
+    "component",
+    {
+    "libraryName": "element-ui",
+    "styleLibraryName": "theme-chalk"
+    }
+]
+element-ui 关于按需引入的css 样式配置

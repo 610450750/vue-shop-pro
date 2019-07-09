@@ -1,0 +1,31 @@
+使用描述：
+使用第三方模块之前,需要建立一个 package.json文件
+当我下载了一个第三方包,会在package.json文件中记录
+{
+  "name": "01webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    //修改webpack 指令
+    "pack":"webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  //生产依赖
+  "dependencies": {
+    "jquery": "^3.4.1"
+  },
+  //开发依赖
+  "devDependencies": {
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2"
+  }
+}
+安装生产依赖：npm install --save 安装 dependencies 中的模块
+安装开发依赖：npm install --save-dev 安装 devDependencies 中的模块
+
+安装生产依赖：npm install --production 只下载安装 dependencies 中的模块
+批量安装模块：npm install   如果直接写会把当前package.json文件所有依赖项全部下载

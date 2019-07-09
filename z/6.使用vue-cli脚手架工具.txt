@@ -1,0 +1,39 @@
+Vue-cli 脚手架工具
+-g代表安装到全局
+1. 安装：npm install -g  vue-cli
+//Vue-Cli 项目文件夹
+
+2. dos命令配置：vue init webpack Vue-Cli
+? Project name vue-cli  --使用脚手架 创建一个vue-cli
+? Project description A Vue.js project  --是否是一个vue.js文件
+? Author                        --配置邮箱地址
+? Vue build runtime        --使用阉割版vue
+? Install vue-router? Yes   --使用路由
+? Use ESLint to lint your code? (Y/n)   --使用ESLint js代码规范检查
+? Set up unit tests No      --不需要单元测试
+? Setup e2e tests with Nightwatch? No  --不需要单元测试
+? Should we run `npm install` for you after the project has been created? (recommended) npm
+--选择使用npm 方式下载
+
+3. 修改package.json文件 
+scripts：{dev改成line npm run line 运行项目,build 改成pack npm run pack打包项目}
+4. webpack.config 配置文件
+1）使用脚手架 会在build中生成webpack.dev.conf 文件
+2）找到config对应引入路径地址 const config = require('../config/index.js')
+3）找到config/index.js
+修改    host: '127.0.0.1,   地址
+修改    port: 8080,          端口
+修改    autoOpenBrowser: true,  //自动开启浏览器查看效果 保存后自动弹出页面
+5）拷贝格式化配置文件.prettierrc 到根目录 可以符合ESLint标准格式化 快捷键 ctrl + alt + f 
+
+4. 部署git 版本控制 分布式系统
+安装：git init
+三个区域：
+工作区  vue-cli目录
+暂存区  .git/index
+仓库区  .git文件目录
+远程仓库区  github || 码云
+提交代码指令：
+工作区----》暂存区：git add .
+暂存区----》仓库区：git commit -m '提交日志信息'
+仓库区----》远程仓库：git push 远程地址 分支
