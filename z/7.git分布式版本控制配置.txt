@@ -17,14 +17,16 @@ git log      --查看之前版和之后版本
 git reflog --查看仓库中所有版本记录
 
 本地仓库 分支
-git branch login
-git checkout login  --切换分支
+git branch login         --创建分支
+git checkout master  --切换分支
+git merge login          --合并分支
 
 服务端远程 分享仓库
 git init --bare --初始化远程仓库
 git clone 远程仓库地址 [项目名称]   --克隆远程仓库
 git pull 远程仓库地址 master          --拉取远程仓库
 git push  远程仓库地址 master        --提交远程仓库
+
 
 git ssh 协议（可以与 github 码云等平台关联）
 1.  生成公钥 私钥
