@@ -94,7 +94,7 @@ Vue 的Element-Ui 组件库
 在package.config.js中配置{test:/\.(eot|svg|ttf|woff|woff2)$/,use:'url-loader'}
 如果不配置默认安装后会报错
 
-3、element-ui 按需引入模块
+3、element-ui 按需引入css 样式
 借助 babel-plugin-component，我们可以只引入需要的组件，以达到减小项目体积的目的。
 安装：npm install babel-plugin-component -D
 需要在.babelrc 文件中配置plugin
@@ -105,4 +105,3 @@ Vue 的Element-Ui 组件库
     "styleLibraryName": "theme-chalk"
     }
 ]
-element-ui 关于按需引入的css 样式配置

@@ -37,3 +37,9 @@ scripts：{dev改成line npm run line 运行项目,build 改成pack npm run pack
 工作区----》暂存区：git add .
 暂存区----》仓库区：git commit -m '提交日志信息'
 仓库区----》远程仓库：git push 远程地址 分支
+
+5. vue-cli 不包含的组件
+less：npm install --save-dev less-loader less
+element-ui：npm i element-ui
+element-ui按需引入css：npm install babel-plugin-component -D
+axios:npm i axios

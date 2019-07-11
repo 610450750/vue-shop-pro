@@ -16,6 +16,10 @@ git commit -m '存入仓库 正式版本 V1.0'   --从缓存去存入本地仓�
 git log      --查看之前版和之后版本
 git reflog --查看仓库中所有版本记录
 
+本地仓库 分支
+git branch login
+git checkout login  --切换分支
+
 服务端远程 分享仓库
 git init --bare --初始化远程仓库
 git clone 远程仓库地址 [项目名称]   --克隆远程仓库
