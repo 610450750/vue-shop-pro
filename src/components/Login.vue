@@ -16,7 +16,7 @@
       <!-- input 密码 -->
       <el-form-item prop="password">
         <el-input v-model="form.password" type="password" placeholder="密码">
-          <i slot="prefix" class="icon iconfont icon-password"></i>
+          <i slot="prefix" class="icon iconfont icon-3702mima"></i>
         </el-input>
       </el-form-item>
 
@@ -38,8 +38,8 @@ export default {
     data() {
         return {
             form: {
-                username: '',
-                password: ''
+                username: 'admin',
+                password: '123456'
             },
             // 给登录表单设置校验规则
             formRules: {
@@ -66,9 +66,9 @@ export default {
                     if (res.meta.status !== 200){
                         return this.$message.error('用户名或密码不存在')
                     }
-                    // 登录成功后 服务端会向 前端返回一个 token 唯一标识
+                    // 登录成功后 服务端会向 前端返回一个 token 校验令牌
+                    // 当 token 校验令牌 消失时 应取消当前地址的访问权限 返回到登录页面进行认证
                     // 通过sessionStorage记录token
-                    // 所有请求中都需要加入 token 认证的标识
                     window.sessionStorage.setItem('token' , res.data.token)
                     // 路由跳转
                     this.$router.push('/home')
