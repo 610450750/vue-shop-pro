@@ -15,25 +15,29 @@
             :unique-opened="true" 每次只能展开一个 子菜单
             :collapse="menushow" 是否可以折叠
             :collapse-transition="false" 动画效果
+            :router="true" 开启路由 index属性可以与路由直接绑定
         -->
         <el-menu
+          style="border:none"
           default-active="125-110"
           background-color="#333744"
           text-color="#fff"
-          active-text-color="#409EFF"
+          active-text-color="#4 09EFF"
           :collapse="menushow"
           :collapse-transition="false"
           :unique-opened="true"
           :style="menushow ? 'width:65px':'width:200px'"
+          :router="true"
         >
           <el-submenu :index="item.id+''" v-for="(item,index) in menulist" :key="item.id">
             <template slot="title">
               <i :class="'icon iconfont icon-' + menuimg[index]"  style="margin-right:10px"></i>
               <span style="font-size:13px">{{item.authName}}</span>
             </template>
+            <!--  index 指向绑定路由 在数据库中读取地址 -->
             <el-menu-item
-              :index="item.id+'-'+items.id"
               v-for="items in item.children"
+              :index="items.path"
               :key="items.id"
             >
               <i class="el-icon-menu"></i>

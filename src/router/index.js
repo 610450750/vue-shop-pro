@@ -3,18 +3,24 @@ import Router from 'vue-router'
 import Login from '@/components/Login.vue'
 import Home from '@/components/Home.vue'
 import WelCome from '@/components/WelCome.vue'
+import User from '@/components/User.vue'
 
 Vue.use(Router)
 // 实例化路由
 const router = new Router({
     routes: [
+        // redirect 页面重定向
+        { path: '/', redirect: '/home' },
         { path: '/login', component: Login },
         {
             path: '/home',
             component: Home,
-            // 默认访问页   重定向子级
-            redirect:'/welcome',
-            children: [{ path: '/welcome', component: WelCome }]
+            redirect: '/welcome',
+            // 子级路由
+            children: [
+                { path: '/welcome', component: WelCome },
+                { path: '/users', component: User }
+            ]
         }
     ]
 })

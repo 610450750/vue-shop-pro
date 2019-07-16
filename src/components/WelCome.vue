@@ -1,12 +1,5 @@
 <template>
-    <div>欢迎页面1111111111111111
-        234324
-        324
-        32
-        432
-        432
-        4
-        311111111111</div>
+    <div> Welcome page </div>
 </template>
 
 <script>
