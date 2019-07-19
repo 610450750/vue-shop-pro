@@ -6,6 +6,8 @@ import App from './App'
 import router from './router'
 // 引入css样式全局控制
 import './assets/css/global.css'
+// 引入element-ui全局css
+// import 'element-ui/lib/theme-chalk/index.css'
 // 引入element-ui组件库
 import ElementUi from 'element-ui'
 // 引入iconfont 图标库
@@ -36,10 +38,9 @@ Vue.use(ElementUi)
 Vue.config.productionTip = false
 
 /* 创建一个Vue实例 */
-const vm = new Vue({
-    // 注册到Vue中
-    router,
-    render: h => h(App)
+new Vue({
+  el: '#app',
+  router,
+  render: h => h(App)
 })
-// 将Vue 挂载到 index.html div中
-vm.$mount('#app')
+

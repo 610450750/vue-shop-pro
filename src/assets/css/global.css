@@ -8,9 +8,6 @@ html,body,h1,h2,h3,h4,h5,h6,ul,ol,dl,li,dt,dd,p{
 html,body,#app{
     height: 100%;
 }
-body{
-    background-color: #2b4b6b;
-}
 /* 全局卡片 */
 .el-card {
 	margin-top: 15px;

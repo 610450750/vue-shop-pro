@@ -30,6 +30,12 @@
       </el-row>
 
       <!-- 报表区 -->
+      <!-- 
+          :data="infodb" 可以直接使用 data中的对象 
+          :data="bind()"  可以使用一个函数 返回的对象
+          例如bind中 封装了一个 返回对象,该对象在data数据通过条件进行筛选后重新返回一个对象
+      -->
+      <!-- <el-table :data="infodb" border> -->
       <el-table :data="infodb" border>
         <el-table-column type="index" label="序号" width="50px"></el-table-column>
         <el-table-column prop="username" label="用户名"></el-table-column>
@@ -76,7 +82,7 @@
                 icon="el-icon-setting"
                 :circle="false"
                 size="mini"
-                @click="roleUser(resInfo.row.id)"
+                @click="roleBind(resInfo.row.id)"
               ></el-button>
             </el-tooltip>
           </template>
@@ -161,6 +167,40 @@
           <el-button type="primary" @click="editUser">确 定</el-button>
         </span>
       </el-dialog>
+
+      <!-- 新增角色的Dialog弹框区 -->
+      <!-- :visible.sync 是否弹窗 true | false -->
+      <!-- @close关闭弹框时触发 -->
+      <el-dialog
+        title="用户分配角色"
+        :visible.sync="roleDialogVisible"
+        width="50%"
+        @close="roleDialogClose"
+      >
+        <!--  rules 启用表单校验 prop 在函数中接收 input-->
+        <el-form ref="roleInfoRef" :rules="roleUserInfoRules" :model="roleUserInfo">
+          <el-form-item label="当前用户名" label-width="100px">
+            <el-col :span="14">
+              <el-input v-model="roleUserInfo.username" :disabled="true"></el-input>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="当前角色" prop="rid" label-width="100px">
+            <el-select v-model="roleUserInfo.rid" placeholder="请选择">
+              <el-option
+                v-for="item in roleInfo"
+                :key="item.id"
+                :label="item.roleName"
+                :value="item.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="roleDialogVisible = false">取 消</el-button>
+          <!-- 提交添加表单 客户端校验 与 服务端校验  -->
+          <el-button type="primary" @click="roleUser">确 定</el-button>
+        </span>
+      </el-dialog>
     </el-card>
   </div>
 </template>
@@ -188,6 +228,21 @@ export default {
         }
 
         return {
+            // 角色弹框
+            roleDialogVisible: false,
+            // 用户id 查询 角色 id 和当前用户名称
+            roleUserInfo: {
+                username: '', //用户名称
+                rid: '' //角色ID
+            },
+            roleUserInfoRules: {
+                // required 必填 message 提示信息 trigger 失去焦点触发
+                rid: [
+                    { required: true, message: '角色为必填项', trigger: 'blur' }
+                ]
+            },
+            //  role 数据
+            roleInfo: [],
             // edit表单属性
             editForm: {
                 id: 0,
@@ -248,7 +303,7 @@ export default {
             queryParams: {
                 query: '', //搜索条件
                 pagenum: 1, //当前页数
-                pagesize: 3, //每页显示条数
+                pagesize: 5, //每页显示条数
                 total: 0 //总条数
             }
         }
@@ -334,6 +389,13 @@ export default {
                     }
                     // 提示成功
                     this.$message.success(res.meta.msg)
+                    //如果当前页面只有一条数据 被删除后 当前页数减一
+                    if (
+                        this.infodb.length === 1 &&
+                        this.queryParams.pagenum > 1
+                    ) {
+                        this.queryParams.pagenum--
+                    }
                     // 重新载入数据
                     this.getUserInfo()
                 })
@@ -360,12 +422,9 @@ export default {
         },
         // 修改用户
         editUser() {
-            this.$confirm('此操作将修改该信息, 是否继续?', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'warning'
-            })
-                .then(async () => {
+            // 表单域验证 validate 回调函数 valid 参数为布尔值 通过验证true 未通过false
+            this.$refs.editFormRef.validate(async valid => {
+                if (valid) {
                     const { data: res } = await this.$http.put(
                         'users/' + this.editForm.id,
                         this.editForm
@@ -380,13 +439,8 @@ export default {
                     this.editDialogVisible = false
                     // 重新加载数据
                     this.getUserInfo()
-                })
-                .catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: '已取消修改'
-                    })
-                })
+                }
+            })
         },
         // 开关回调函数 $event 当前状态 id 参数 (状态发生改变时触发)
         async editSwitchState($event, id) {
@@ -407,8 +461,57 @@ export default {
         editDialogClose() {
             this.$refs.editFormRef.resetFields()
         },
-        // 分配角色
-        roleUser() {}
+        // 数据自动筛选函数 返回一个新的infodb 数据对象
+        // 当前数据为与分页有绑定关系 再此分页功能 不能实现同步
+        bind() {
+            // 过滤数组 this.infodb.filter(function(内容){return 条件})    把符合条件的内容返回
+            // 当前this 指向在filter 函数中, 使用箭头函数 将this 指向全局 来获取this.queryParams.query
+            var newInfoDb = this.infodb.filter(itme => {
+                // 将返回值 return 回数组 是否包含includes
+                return itme.username.includes(this.queryParams.query)
+            })
+            return newInfoDb
+        },
+        // 根据用户ID查询 关联角色
+        async roleBind(id) {
+            this.roleDialogVisible = true
+            const { data: res } = await this.$http.get('users/' + id)
+            if (res.meta.status !== 200) {
+                return this.$message.error(res.meta.msg)
+            }
+            // console.log(res)
+            this.roleUserInfo = res.data
+
+            // 获取角色列表
+            const { data: res1 } = await this.$http.get('roles')
+            if (res1.meta.status !== 200) {
+                return this.$message.error(res1.meta.msg)
+            }
+            console.log(res1)
+            this.roleInfo = res1.data
+        },
+        // 分配用户角色
+        async roleUser() {
+            console.log(this.roleUserInfo.rid)
+            const { data: res } = await this.$http.put(
+                'users/' + this.roleUserInfo.id + '/role',
+                this.roleUserInfo
+            )
+            // 修改失败抛出异常
+            if (res.meta.status !== 200) {
+                return this.$message.error(res.meta.msg)
+            }
+            // 关闭提示框
+            this.roleDialogVisible = false
+            // 提示成功
+            this.$message.success(res.meta.msg)
+            // 载入数据
+            this.getUserInfo()
+        },
+        // 角色 重置表单
+        roleDialogClose() {
+            this.$refs.roleInfoRef.resetFields()
+        }
     }
 }
 </script>

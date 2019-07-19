@@ -1,35 +1,37 @@
 <template>
-  <div class="login">
-    <!-- logo图标 -->
-    <div class="logo-box">
-      <img src="../assets/img/logo.png" alt="logo" class="logo" />
-    </div>
-    <!-- from表单 rules表单验证 -->
-    <el-form ref="formRef" :model="form" :rules="formRules">
-      <!-- prop 验证的数据 -->
-      <el-form-item prop="username">
-        <!-- input 用户名 -->
-        <el-input v-model="form.username" placeholder="用户名">
-          <i slot="prefix" class="icon iconfont icon-user"></i>
-        </el-input>
-      </el-form-item>
-      <!-- input 密码 -->
-      <el-form-item prop="password">
-        <el-input v-model="form.password" type="password" placeholder="密码">
-          <i slot="prefix" class="icon iconfont icon-3702mima"></i>
-        </el-input>
-      </el-form-item>
+  <div class="loginbox">
+    <div class="login">
+      <!-- logo图标 -->
+      <div class="logo-box">
+        <img src="../assets/img/logo.png" alt="logo" class="logo" />
+      </div>
+      <!-- from表单 rules表单验证 -->
+      <el-form ref="formRef" :model="form" :rules="formRules">
+        <!-- prop 验证的数据 -->
+        <el-form-item prop="username">
+          <!-- input 用户名 -->
+          <el-input v-model="form.username" placeholder="用户名">
+            <i slot="prefix" class="icon iconfont icon-user"></i>
+          </el-input>
+        </el-form-item>
+        <!-- input 密码 -->
+        <el-form-item prop="password">
+          <el-input v-model="form.password" type="password" placeholder="密码">
+            <i slot="prefix" class="icon iconfont icon-3702mima"></i>
+          </el-input>
+        </el-form-item>
 
-      <!-- 布局 Layout 布局 24格 -->
-      <el-row>
-        <!--  offset:栅格左侧的间隔格数 -->
-        <el-col :offset="15">
-          <!-- button -->
-          <el-button type="primary" v-on:click="login">登录</el-button>
-          <el-button type="info" v-on:click="reset">重置</el-button>
-        </el-col>
-      </el-row>
-    </el-form>
+        <!-- 布局 Layout 布局 24格 -->
+        <el-row>
+          <!--  offset:栅格左侧的间隔格数 -->
+          <el-col :offset="15">
+            <!-- button -->
+            <el-button type="primary" v-on:click="login">登录</el-button>
+            <el-button type="info" v-on:click="reset">重置</el-button>
+          </el-col>
+        </el-row>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -62,14 +64,17 @@ export default {
                 // validate 验证 不通过 为false 通过为 true
                 if (valid === true) {
                     // 使用axios 发送post 请求 返回一个Promise
-                    const { data:res } = await this.$http.post('login', this.form)
-                    if (res.meta.status !== 200){
+                    const { data: res } = await this.$http.post(
+                        'login',
+                        this.form
+                    )
+                    if (res.meta.status !== 200) {
                         return this.$message.error('用户名或密码不存在')
                     }
                     // 登录成功后 服务端会向 前端返回一个 token 校验令牌
                     // 当 token 校验令牌 消失时 应取消当前地址的访问权限 返回到登录页面进行认证
                     // 通过sessionStorage记录token
-                    window.sessionStorage.setItem('token' , res.data.token)
+                    window.sessionStorage.setItem('token', res.data.token)
                     // 路由跳转
                     this.$router.push('/home')
                 }
@@ -84,6 +89,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.loginbox {
+    height: 100%;
+    background-color: #2b4b6b;
+}
 .login {
     height: 304px;
     width: 450px;

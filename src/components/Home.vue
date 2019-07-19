@@ -22,7 +22,7 @@
           default-active="125-110"
           background-color="#333744"
           text-color="#fff"
-          active-text-color="#4 09EFF"
+          active-text-color="#409EFF"
           :collapse="menushow"
           :collapse-transition="false"
           :unique-opened="true"

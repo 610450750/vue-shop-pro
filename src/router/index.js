@@ -4,6 +4,8 @@ import Login from '@/components/Login.vue'
 import Home from '@/components/Home.vue'
 import WelCome from '@/components/WelCome.vue'
 import User from '@/components/User.vue'
+import Rights from '@/components/Rights.vue'
+import Role from '@/components/Role.vue'
 
 Vue.use(Router)
 // 实例化路由
@@ -19,7 +21,9 @@ const router = new Router({
             // 子级路由
             children: [
                 { path: '/welcome', component: WelCome },
-                { path: '/users', component: User }
+                { path: '/users', component: User },
+                { path: '/rights', component: Rights },
+                { path: '/roles', component: Role }
             ]
         }
     ]
