@@ -10,6 +10,8 @@ import './assets/css/global.css'
 // import 'element-ui/lib/theme-chalk/index.css'
 // 引入element-ui组件库
 import ElementUi from 'element-ui'
+//  引入表格树
+import ZkTable  from 'vue-table-with-tree-grid'
 // 引入iconfont 图标库
 import './assets/fonts/iconfont.css'
 // 引入 axios
@@ -34,6 +36,9 @@ Vue.prototype.$http = axios
 
 // 批量注册 element-ui
 Vue.use(ElementUi)
+
+// 批量注册 vue-tree-table
+Vue.use(ZkTable)
 
 Vue.config.productionTip = false
 

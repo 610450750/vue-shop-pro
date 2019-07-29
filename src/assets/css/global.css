@@ -19,6 +19,10 @@ html,body,#app{
 	width: 100%;
 	font-size: 12px;
 }
+/* 全局树报表 */
+.zk-table{
+	margin-top: 15px;
+}
 /* 	全局分页 */
 .el-pagination {
 	margin-top: 15px;

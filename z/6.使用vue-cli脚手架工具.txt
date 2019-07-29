@@ -43,5 +43,6 @@ less：npm install --save-dev less-loader less
 element-ui：npm install element-ui
 element-ui按需引入css：npm install babel-plugin-component -D
 axios:npm i axios
+Zk-Table： npm i vue-table-with-tree-grid
    
 npm uninstall element-ui:卸载
