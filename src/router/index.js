@@ -7,6 +7,7 @@ import User from '@/components/User.vue'
 import Rights from '@/components/Rights.vue'
 import Role from '@/components/Role.vue'
 import Cat from '@/components/Cat.vue'
+import Param from '@/components/Param.vue'
 
 Vue.use(Router)
 // 实例化路由
@@ -25,7 +26,8 @@ const router = new Router({
                 { path: '/users', component: User },
                 { path: '/rights', component: Rights },
                 { path: '/roles', component: Role },
-                { path:'/categories',component:Cat}
+                { path:'/categories',component:Cat},
+                { path:'/params',component:Param}
             ]
         }
     ]

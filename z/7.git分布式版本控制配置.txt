@@ -26,7 +26,7 @@ git init --bare --初始化远程仓库
 git clone 远程仓库地址 [项目名称]   --克隆远程仓库
 git pull 远程仓库地址 master          --拉取远程仓库
 git push  远程仓库地址 master        --提交远程仓库
-
+远程仓库地址：git@github.com:610450750/vue-shop-pro.git
 
 git ssh 协议（可以与 github 码云等平台关联）
 1.  生成公钥 私钥

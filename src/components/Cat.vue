@@ -334,6 +334,11 @@ export default {
             this.catForm.cat_level = arrCat.length
             // console.log(this.catForm.cat_pid)
             // console.log(this.catForm.cat_level)
+
+            // 在回调函数中 可以直接获取 选中值的ID
+            // 此方法用于 联动菜单 传值做关联查询
+            // [0] 获取一级ID [1]获取二级ID [2] 获取三级ID
+            //console.log(this.showCatInfo[1])
         }
     },
     data() {
@@ -399,7 +404,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.el-cascader{
-  width:100%
+.el-cascader {
+    width: 100%;
 }
 </style>
