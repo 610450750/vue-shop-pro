@@ -31,15 +31,11 @@
         >
           <el-submenu :index="item.id+''" v-for="(item,index) in menulist" :key="item.id">
             <template slot="title">
-              <i :class="'icon iconfont icon-' + menuimg[index]"  style="margin-right:10px"></i>
+              <i :class="'icon iconfont icon-' + menuimg[index]" style="margin-right:10px"></i>
               <span style="font-size:13px">{{item.authName}}</span>
             </template>
             <!--  index 指向绑定路由 在数据库中读取地址 -->
-            <el-menu-item
-              v-for="items in item.children"
-              :index="items.path"
-              :key="items.id"
-            >
+            <el-menu-item v-for="items in item.children" :index="items.path" :key="items.id">
               <i class="el-icon-menu"></i>
               <span style="font-size:13px">{{items.authName}}</span>
             </el-menu-item>
@@ -48,8 +44,8 @@
       </el-aside>
       <!-- 中间容器 -->
       <el-main>
-          <!-- 子级路由 -->
-          <router-view></router-view>
+        <!-- 子级路由 -->
+        <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>

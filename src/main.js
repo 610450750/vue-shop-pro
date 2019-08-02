@@ -11,16 +11,23 @@ import './assets/css/global.css'
 // 引入element-ui组件库
 import ElementUi from 'element-ui'
 //  引入表格树
-import ZkTable  from 'vue-table-with-tree-grid'
+import ZkTable from 'vue-table-with-tree-grid'
 // 引入iconfont 图标库
 import './assets/fonts/iconfont.css'
 // 引入 axios
 import axios from 'axios'
+// 引入axios 加载jQuery 进度条组件
+import NProgress from 'nprogress/nprogress.js'
+// 引入axios 加载jQuery 进度条样式表
+import 'nprogress/nprogress.css'
+
 // 给axios做配置 (访问根地址、Vue之$http成员)
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
-// 给axios 设置拦截器  绑定token
+// 给axios 设置 请求拦截器  绑定token
 axios.interceptors.request.use(
     function(config) {
+        // 开始进度条
+        NProgress.start()
         // 获取token 令牌
         var token = window.sessionStorage.getItem('token')
         // 将令牌加入 axios 请求中
@@ -31,6 +38,17 @@ axios.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+// 给axios 设置 响应拦截器
+axios.interceptors.response.use(
+    function(response) {
+        NProgress.done()
+        return response
+    },
+    function(error) {
+        return Promise.reject(error)
+    }
+)
+
 // 给Vue配置axios 成员
 Vue.prototype.$http = axios
 
@@ -44,8 +62,7 @@ Vue.config.productionTip = false
 
 /* 创建一个Vue实例 */
 new Vue({
-  el: '#app',
-  router,
-  render: h => h(App)
+    el: '#app',
+    router,
+    render: h => h(App)
 })
-

@@ -1,0 +1,77 @@
+1、使用webpack打包
+--report    //生成一个打包试图 访问地址：127.0.0.1:8888
+指令：npm run pack --report
+static/css/app.514c5c38e75f54233abe36f12ac3795f.css     235 kB
+static/fonts/element-icons.535877f.woff    28.2 kB
+static/js/vendor.3d2f2eb7ea439d805347.js    1.55 MB
+static/js/app.eb0ffb5cbaeb7a0a4a41.js    60.9 kB
+static/js/manifest.2ae2e69a05c33dfc65f8.js  857 bytes
+static/fonts/element-icons.732389d.ttf      56 kB
+static/css/app.514c5c38e75f54233abe36f12ac3795f.css.map     333 kB
+static/js/vendor.3d2f2eb7ea439d805347.js.map    6.35 MB
+static/js/app.eb0ffb5cbaeb7a0a4a41.js.map     217 kB
+static/js/manifest.2ae2e69a05c33dfc65f8.js.map    4.97 kB
+index.html  761 bytes
+打包后会在dist文件夹中 生成 css文件
+主要生成html页面和3个js文件,其中vendor为主js文件,map是支撑文件
+
+2、使用webpack 优化处理externals方案
+根据试图：127.0.0.1:8888 查看打包过程中用到的静态资源
+将引入的js静态资源通过外网服务器(bootcdn)来访问,这样在打包后不会消耗本机服务器的资源。
+(1) build/webpack.prod.conf.js中找到webpackConfig函数
+新增：externals 配置
+ externals: {
+    //语法：模块名称:模块内部构造函数
+    //例如：import xxx from '模块名称'
+    vue: 'Vue',
+    axios: 'axios',
+    'vue-router': 'VueRouter',
+    nprogress: 'NProgress'
+}
+(2) 在index.html 主页面中 通过script 标签引入外部 静态资源（通过外网服务器提供）
+<script src="https://cdn.bootcss.com/vue/2.5.20/vue.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+<script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js"></script>
+<script src="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.js"></script>
+<script src="https://cdn.bootcss.com/echarts/4.2.1/echarts.js"></script>
+(3) 映射关系 webpack在打包main.js主入口文件时先检查是否有externals配置
+如果有配置 则不会引入本地资源,而会通过 externals 配置映射对应index.html 外部资源
+指令：npm run pack --report
+此时主文大小件被压缩一倍
+static/js/vendor.f6185ba256a4bda49828.js     638 kB
+static/js/vendor.f6185ba256a4bda49828.js.map    1.42 MB
+ 
+ 3、将打包好的dist文件 在node 服务端发布
+ （1）新建ShopWeb文件夹
+ （2）把dist文件拷贝到根目录
+ （3）初始化node环境下载配置文件 指令：npm init -y
+ （4）安装express 服务组件 指令：npm install express
+ （5）创建app.js 服务文件
+//通过nodejs 创建一个http服务器
+const express = require('express')
+// 引入压缩机器
+const compression = require('compression')
+// 创建express对象
+const app = express()
+// 此压缩必须在静态托管前来压缩
+// 开启compression 压缩机制
+app.use(compression())
+// 创建静态托管
+app.use(express.static('./dist'))
+
+// 监听端口
+app.listen(12345,function(){
+    console.log('服务启动成功！\n http://127.0.0.1:12345')
+})
+（6）运行node app.js
+
+4、将已发布好的文件 进行网络优化 
+给node服务端开启 compression 优化压缩处理
+使得经过网络传输的文件大小可以进一步压缩
+compression 压缩处理功能包
+安装：npm install compression
+
+通过http://127.0.0.1:12345 访问请求
+查看网络请求
+当前：vendor.f6185ba256a4bda49828.js 文件大小 为 623.42 kB
+压缩后大小：vendor.f6185ba256a4bda49828.js 文件大小 为 165.36 kB

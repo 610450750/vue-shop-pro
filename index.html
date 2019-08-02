@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>vue-shop-pro</title>
-  </head>
-  <body>
-    <!-- 主容器文件 -->
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>vue-shop-pro</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.20/vue.js"></script>
+  <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+  <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js"></script>
+  <script src="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.js"></script>
+  <script src="https://cdn.bootcss.com/echarts/4.2.1/echarts.js"></script>
+  <!-- 在页面中 引入 进度条样式 -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.css">
+</head>
+
+<body>
+  <!-- 主容器文件 -->
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>
+<script>
+  NProgress.start()
+  window.onload = function () {
+    NProgress.done()
+  }
+</script>

@@ -21,7 +21,7 @@
             @keyup.enter.native="getUserInfo"
             @keyup.esc.native="clear"
           >
-            <el-button slot="append" icon="el-icon-search" v-on:click="getUserInfo"></el-button>
+            <el-button slot="append" icon="el-icon-search" v-on:click="selInfo"></el-button>
           </el-input>
         </el-col>
         <el-col :span="6">
@@ -325,6 +325,11 @@ export default {
             // 获取总条数
             this.queryParams.total = res.data.total
         },
+        // 查询按钮 查询时从第一页开始查询
+        selInfo() {
+            this.queryParams.pagenum = 1
+            this.getUserInfo()
+        },
         // 每页条数变化 回调函数
         handleSizeChange(val) {
             // 接收选取的参数
@@ -461,6 +466,7 @@ export default {
         editDialogClose() {
             this.$refs.editFormRef.resetFields()
         },
+        // 执行自动搜索 功能
         // 数据自动筛选函数 返回一个新的infodb 数据对象
         // 当前数据为与分页有绑定关系 再此分页功能 不能实现同步
         bind() {

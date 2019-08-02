@@ -13,6 +13,7 @@ npm install webpack  webpack-cli --save-dev别名（-D）
 在scripts标签中增加 ,"pack":"webpack" 使用pack 转接
 3、启动webpack 打包指令
 语法：npm run pack
+语法：npm run pack --report //打包完成后 返回报告
 4、打包后会在src同级生成一个dist文件夹，同时生成一个main.js文件,
 main.js 文件会将所有的js,css,jquery等内容 压缩到一个js中,可以实现,降解,转换,兼容
 5、配置webpack的 模式 入口 出口 创建webpack.config.js配置文件
@@ -105,3 +106,12 @@ Vue 的Element-Ui 组件库
     "styleLibraryName": "theme-chalk"
     }
 ]
+---------------------------------------------------------------------------------
+Axios加载动画 jQuery 插件nprogress
+安装：npm install nprogress
+1、在main.js import 引入
+2、在axios 请求拦截器和响应拦截器中 设置动画开始和结束
+3、开始：NProgress.start() 结束：NProgress.done()
+---------------------------------------------------------------------------------
+百度图标 ECharts 插件
+安装：npm install echarts
