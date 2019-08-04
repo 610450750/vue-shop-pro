@@ -14,6 +14,8 @@ import ElementUi from 'element-ui'
 import ZkTable from 'vue-table-with-tree-grid'
 // 引入iconfont 图标库
 import './assets/fonts/iconfont.css'
+// 导入日期格式化组件
+// import moment from 'moment'
 // 引入 axios
 import axios from 'axios'
 // 引入axios 加载jQuery 进度条组件

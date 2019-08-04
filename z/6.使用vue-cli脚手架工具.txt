@@ -44,5 +44,8 @@ element-ui：npm install element-ui
 element-ui按需引入css：npm install babel-plugin-component -D
 axios:npm i axios
 Zk-Table： npm i vue-table-with-tree-grid
-   
+jQuery 插件nprogress：npm install nprogress
+ECharts ：npm install echarts
+vue-quill-editor:npm install vue-quill-editor --save
+
 npm uninstall element-ui:卸载

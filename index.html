@@ -5,13 +5,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>vue-shop-pro</title>
-  <script src="https://cdn.bootcss.com/vue/2.5.20/vue.js"></script>
+  <!-- 通过外部服务器 访问组件 -->
+  <!-- <script src="https://cdn.bootcss.com/vue/2.5.20/vue.js"></script>
   <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
-  <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js"></script>
+  <script src="https://cdn.bootcss.com/vue-router/3.0.2/vue-router.js"></script>
+  <script src="https://cdn.bootcss.com/echarts/4.2.1/echarts.js"></script> -->
   <script src="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.js"></script>
-  <script src="https://cdn.bootcss.com/echarts/4.2.1/echarts.js"></script>
   <!-- 在页面中 引入 进度条样式 -->
   <link rel="stylesheet" href="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.css">
+
 </head>
 
 <body>
@@ -22,6 +24,9 @@
 
 </html>
 <script>
+  // 查看所有组件的 构造函数
+  // console.log(window)
+  // 加载进度条
   NProgress.start()
   window.onload = function () {
     NProgress.done()

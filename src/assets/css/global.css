@@ -1,30 +1,49 @@
 /*全局样式初始化*/
-html,body,h1,h2,h3,h4,h5,h6,ul,ol,dl,li,dt,dd,p{
-	margin:0px;
-	padding: 0px;
-	/*去除 li 列表头图标*/
-	list-style: none;
+html,body,h1,h2,h3,h4,h5,h6,ul,ol,dl,li,dt,dd,p {
+    margin: 0px;
+    padding: 0px;
+    /*去除 li 列表头图标*/
+    list-style: none;
 }
-html,body,#app{
+html,
+body,
+#app {
     height: 100%;
 }
 /* 全局卡片 */
 .el-card {
-	margin-top: 15px;
-	box-shadow: 0 1px 1px rgba(0,0,0,.15) !important;
+    margin-top: 15px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
 }
 /* 全局报表 */
 .el-table {
-	margin-top: 15px;
-	width: 100%;
-	font-size: 12px;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 12px;
 }
 /* 全局树报表 */
-.zk-table{
-	margin-top: 15px;
+.zk-table {
+    margin-top: 15px;
 }
 /* 	全局分页 */
 .el-pagination {
-	margin-top: 15px;
-	font-size: 12px
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+/* 全局步骤条 */
+.el-steps {
+	margin-top: 20px;
+}
+.el-step__title{
+	font-size: 12px;
+}
+
+/* 全局 input-number 样式 */
+.el-input-number  .el-input__inner {
+    text-align: left;
+}
+/* 全是 富文本编辑器 */
+.ql-editor{
+    height: 200px;
 }

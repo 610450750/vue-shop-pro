@@ -11,6 +11,8 @@ import Param from '@/components/Param.vue'
 import Goods from '@/components/Goods.vue'
 import Report from '@/components/Report.vue'
 import Orders from '@/components/Orders.vue'
+import GoodsAdd from '@/components/GoodsAdd.vue'
+
 
 Vue.use(Router)
 // 实例化路由
@@ -33,7 +35,8 @@ const router = new Router({
                 { path: '/params', component: Param },
                 { path: '/goods', component: Goods },
                 { path: '/reports', component: Report },
-                { path: '/orders', component: Orders }
+                { path: '/orders', component: Orders },
+                { path: '/goodsadd', component: GoodsAdd }
             ]
         }
     ]
